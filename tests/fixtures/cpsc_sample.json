@@ -1,0 +1,53 @@
+[
+  {
+    "RecallNumber": "26-001",
+    "RecallDate": "2026-10-27",
+    "Title": "Portable chargers recalled due to fire hazard",
+    "Products": [{"Name": "Pocket Power Bank", "Model": "PB-100, PB-200", "Type": "Power bank", "NumberOfUnits": "12,000"}],
+    "Hazards": [{"Name": "The battery can overheat, posing fire and burn hazards."}],
+    "Remedies": [{"Name": "Consumers should stop using the product and request a refund."}],
+    "Retailers": [{"Name": "Amazon.com and eBay.com"}],
+    "SoldAtLabel": "Sold online at Amazon.com.",
+    "ManufacturerCountries": [{"Country": "China"}],
+    "ProductUPCs": [{"UPC": "012345678901"}],
+    "URL": "https://www.cpsc.gov/Recalls/2026/example-one",
+    "Images": [{"URL": "https://example.invalid/power-bank.jpg"}],
+    "ConsumerContact": "Secret Person 800-555-0100 secret@example.com",
+    "Injuries": [{"Name": "A named consumer suffered burns in a private incident narrative."}]
+  },
+  {
+    "RecallNumber": "26-002",
+    "RecallDate": "2026-10-26",
+    "Title": "Toy blocks recalled due to choking hazard",
+    "Products": [{"Name": "Tiny Blocks", "ModelNumber": "TB-42", "Type": "Toy", "Units": "4,500"}],
+    "Hazards": [{"Name": "Small parts can detach and pose a choking hazard."}],
+    "RemedyOptions": [{"Name": "Refund"}],
+    "Retailers": [{"Name": "Neighborhood Toy Shop"}],
+    "ManufacturerCountries": [{"Name": "Vietnam"}],
+    "URL": "https://www.cpsc.gov/Recalls/2026/example-two"
+  },
+  {
+    "RecallNumber": "26-003",
+    "RecallDate": "2026-10-25",
+    "Title": "Desk lamps recalled",
+    "Products": [{"Name": "Bright Desk Lamp", "Model": "DL-9", "Type": "Lamp"}],
+    "Hazards": [{"Name": "The cord can cause an electric shock."}],
+    "Remedies": [{"Name": "Repair"}],
+    "Retailers": [{"Name": "Local Lighting Store"}],
+    "ManufacturerCountries": [{"Country": "Germany"}],
+    "URL": "https://www.cpsc.gov/Recalls/2026/example-three"
+  },
+  {
+    "RecallNumber": "26-004",
+    "RecallDate": "2026-10-24",
+    "Title": "Kitchen stools recalled",
+    "Products": [{"Name": "Step Stool", "Models": "SS-A/SS-B", "Type": "Furniture"}],
+    "Hazards": [{"Name": "The stool can collapse, posing a fall hazard."}],
+    "Remedies": [{"Name": "Replace the product."}],
+    "Retailers": [{"Name": "Etsy seller Example Home"}],
+    "ManufacturerCountries": [{"Country": "United States"}],
+    "URL": "https://www.cpsc.gov/Recalls/2026/example-four",
+    "ConsumerContact": {"Email": "private@example.com", "Phone": "800-555-0199"},
+    "Injuries": "No injuries reported in a narrative that must not be retained."
+  }
+]

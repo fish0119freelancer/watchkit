@@ -1,0 +1,18 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pytest
+.pytest_cache/
+
+# Watchkit state and runtime artifacts
+.watchkit/
+*.part
+report.html
+*.html
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
