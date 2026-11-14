@@ -8,6 +8,7 @@ __pycache__/
 
 # Watchkit state and runtime artifacts
 .watchkit/
+examples/out/
 *.part
 report.html
 *.html

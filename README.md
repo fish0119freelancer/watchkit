@@ -1,5 +1,13 @@
 # watchkit
 
+![離線示範報表](docs/report.png)
+
+```bash
+git clone https://github.com/fish0119freelancer/watchkit.git && cd watchkit
+sh examples/run_demo.sh
+open examples/out/kev-report.html
+```
+
 `watchkit` 是一個輕量、零外部相依（僅需 Python 3.10+ 標準庫）的開源框架，專為「公開資料監控 → 自選清單比對 → 每日 HTML 報表產出」設計。
 
 它具備自動快取、重試退避機制、狀態差異比對（Diff）以及深色模式自適應的單一 HTML 報表產出能力。

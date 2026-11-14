@@ -1,5 +1,13 @@
 # watchkit
 
+![Offline demo report](docs/report.png)
+
+```bash
+git clone https://github.com/fish0119freelancer/watchkit.git && cd watchkit
+sh examples/run_demo.sh
+open examples/out/kev-report.html
+```
+
 `watchkit` is a lightweight, zero-dependency (Python 3.10+ standard library only) open-source framework designed for "public data watch -> watchlist matching -> daily HTML report generation".
 
 It provides local caching, retry with backoff, state diffing (new, changed, removed items), and standalone responsive HTML reports with dark mode.

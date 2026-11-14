@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import os
 import re
+import subprocess
+import sys
 from pathlib import Path
 
 from watchkit.core import DEFAULT_USER_AGENT, Source
@@ -31,6 +33,9 @@ TOKEN_PREFIX_PATTERN = re.compile(
 FINMIND_PATTERN = re.compile(r"\bFINMIND_TOKEN\s*=\s*['\"]?([^'\"\s]+)['\"]?")
 DIGIT_PATTERN = re.compile(r"\d{9,}")
 PRIVATE_NETWORK_PATTERN = re.compile(r"\.(?:local|home|lan)\b", re.IGNORECASE)
+PUBLIC_TEXT_DIRS = (WATCHKIT_ROOT / "examples", WATCHKIT_ROOT / "docs")
+TEXT_SUFFIXES = {".md", ".sh", ".txt"}
+PNG_MAX_BYTES = 1_000_000
 
 
 def _load_extra_tokens() -> tuple[str, ...]:
@@ -121,3 +126,69 @@ def test_no_hardcoded_paths_or_personal_identifiers() -> None:
                     violations.append(f"{relative_path}:{line_no}: contains a 9+ digit run")
 
     assert not violations, "Found hygiene violations:\n" + "\n".join(violations)
+
+
+def test_examples_and_docs_text_files_are_in_hygiene_scope() -> None:
+    """Ensure public example and documentation text files are scanned."""
+    scanned_files = {
+        path
+        for path in WATCHKIT_ROOT.rglob("*")
+        if path.is_file() and path.suffix.casefold() in TEXT_SUFFIXES
+    }
+
+    for directory in PUBLIC_TEXT_DIRS:
+        text_files = [
+            path
+            for path in directory.rglob("*")
+            if path.is_file() and path.suffix.casefold() in TEXT_SUFFIXES
+        ]
+        assert text_files, f"Expected public text files under {directory.name}/"
+        assert set(text_files) <= scanned_files
+
+
+def test_png_files_are_not_larger_than_one_megabyte() -> None:
+    """Keep committed screenshots small enough for the public package."""
+    oversized = [
+        f"{path.relative_to(WATCHKIT_ROOT)} ({path.stat().st_size} bytes)"
+        for path in WATCHKIT_ROOT.rglob("*")
+        if path.is_file()
+        and path.suffix.casefold() == ".png"
+        and path.stat().st_size > PNG_MAX_BYTES
+    ]
+
+    assert not oversized, "PNG files exceed the 1 MB limit: " + ", ".join(oversized)
+
+
+def test_offline_demo_python_command_runs_in_tmp_dir(tmp_path: Path) -> None:
+    """Run the README demo command without writing to the tracked example output."""
+    report_path = tmp_path / "kev-report.html"
+    state_dir = tmp_path / ".state"
+    environment = os.environ.copy()
+    environment["PYTHONPATH"] = "src"
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "watchkit",
+            "run",
+            "kev",
+            "--watchlist",
+            "examples/watchlist.txt",
+            "--offline",
+            "tests/fixtures/kev_sample.json",
+            "--out",
+            str(report_path),
+            "--state-dir",
+            str(state_dir),
+        ],
+        cwd=WATCHKIT_ROOT,
+        env=environment,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
+    report = report_path.read_text(encoding="utf-8")
+    assert report.count("class='card hit-card'") >= 2

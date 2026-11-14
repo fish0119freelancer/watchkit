@@ -1,0 +1,5 @@
+# Generic vendor keywords for the offline KEV demo.
+microsoft
+synology
+apache
+cisco
